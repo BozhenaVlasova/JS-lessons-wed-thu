@@ -24,7 +24,7 @@ console.log('lesson 2');
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
 function sum(x: number) {
-    return function(y: number) {
+    return function (y: number) {
         return x + y;
     };
 };
@@ -41,10 +41,11 @@ console.log(sum(3)(6))
 
 function makeCounter() {
     let count: number = 1
-    return function() {
+    return function () {
         return count++
     }
 }
+
 const counter = makeCounter();
 console.log(counter()); // 1
 console.log(counter()); // 2
@@ -59,7 +60,7 @@ console.log(counter()); // 3
 // decrease: -1
 // reset: установить счетчик в 0;
 // set: установить счетчик в заданное значение;
-const Counter = (function() {
+const Counter = (function () {
     let privateCounter = 0;
 
     function changeBy(val: number) {
@@ -67,19 +68,19 @@ const Counter = (function() {
     }
 
     return {
-        increase: function() {
+        increase: function () {
             changeBy(1);
         },
-        decrease: function() {
+        decrease: function () {
             changeBy(-1);
         },
-        reset: function() {
-            privateCounter=0;
+        reset: function () {
+            privateCounter = 0;
         },
-        set: function(n: number) {
+        set: function (n: number) {
             privateCounter = n
         },
-        value: function() {
+        value: function () {
             return privateCounter
         }
     };
@@ -118,15 +119,17 @@ console.log(Counter.value()) // 6
 // решить все задачи по рекурсии которые даны в конце статьи https://learn.javascript.ru/recursion
 // 1) Напишите функцию sumTo(n), которая вычисляет сумму чисел 1 + 2 + ... + n.
 function sumTo1(num: number): number {
-    return num === 1 ? 1 : num + sumTo1(num-1)
+    return num === 1 ? 1 : num + sumTo1(num - 1)
 }
+
 function sumTo2(num: number): number {
     let res = 0
     for (let i = 1; i <= num; i++) {
-        res+=i
+        res += i
     }
     return res
 }
+
 console.log(sumTo1(4)) // 10
 console.log(sumTo2(4)) // 10
 console.log(sumTo1(100)) // 5050
@@ -136,24 +139,84 @@ console.log(sumTo2(100)) // 5050
 function factorial(num: number): number {
     let res = 1
     if (num >= 1) {
-        res *= num * factorial(num-1)
+        res *= num * factorial(num - 1)
     }
     return res
 }
+
 console.log(factorial(5))
 
 // 3) Напишите функцию fib(n) которая возвращает n-е число Фибоначчи.
 function fib(num: number): number {
     return num > 1 ? fib(num - 1) + fib(num - 2) : num
 }
+
 console.log(fib(3))
 console.log(fib(7))
 
 // 4) Напишите функцию printList(list), которая выводит элементы списка по одному.
+let list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: {
+            value: 3,
+            next: {
+                value: 4,
+                next: null
+            }
+        }
+    }
+};
 
+// @ts-ignore
+function printList1(list) {
+    console.log(list.value)
+    if (list.next) {
+        return printList1(list.next)
+    }
+}
+
+// @ts-ignore
+function printList2(list) {
+    let l = list;
+
+    while (l) {
+        alert(l.value);
+        l = l.next;
+    }
+}
+
+console.log(printList1(list))
+console.log(printList2(list))
+
+// 5) Выведите односвязный список из предыдущего задания Вывод односвязного списка в обратном порядке.
+// @ts-ignore
+function printList3(list) {
+    let res: any = []
+    console.log(list.value)
+    if (list.next) {
+        return res.push(printList3(list.next))
+    }
+    return [...res].sort()
+}
+// @ts-ignore
+function printList4(list) {
+    let l = list;
+    let res = []
+    while (l) {
+        alert(l.value);
+        l = l.next;
+        res.push(l)
+    }
+    return [...res].sort()
+}
+console.log(printList3(list))
+console.log(printList4(list))
 
 // Task 06
 // написать функцию, которая повторяет функционал метода flat массива на всю глубину.
 
 // just a plug
-export default () => {};
+export default () => {
+};
